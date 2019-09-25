@@ -1,5 +1,5 @@
 # from flask import render_template
-from app import app
+from . import main
 from flask import render_template,request,redirect,url_for, abort
 from .forms import UpdateProfile,PitForm,CommentForm
 from flask_login import login_required

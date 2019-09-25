@@ -1,6 +1,6 @@
-from app import app,db
+from app import db,create_app
 from flask_script import Manager,Server
-from app.models import User,Category,Pitch,Comment
+from app.models import User,Category,Pitch,Comments
 
 # Creating app instance
 app = create_app('development')

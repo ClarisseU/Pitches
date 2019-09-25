@@ -40,7 +40,7 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'User {self.username}'
 
-class Pitch:
+class Pitch(db.Model):
     '''
     Pitch class to define pitch objects
     '''
@@ -70,7 +70,7 @@ class Pitch:
     
     @classmethod
     def count_pitches(cls,uname):
-           user = User.query.filter_by(username=uname).first()
+        user = User.query.filter_by(username=uname).first()
         pitches = Pitch.query.filter_by(user_id=user.id).all()
         
         pitches_count = 0
@@ -79,11 +79,11 @@ class Pitch:
             
         return pitches_count
     
-     def __repr__(self):
+    def __repr__(self):
         return f'Pitch {self.id}'
     
     
-class Category(db.model):
+class Category(db.Model):
     __tablename__='category'
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(255))
@@ -103,7 +103,7 @@ class Category(db.model):
         return f'Category {self.id}'
     
     
-class Comments(db.model):
+class Comments(db.Model):
     __tablename__= 'comments' 
     id = db.Column(db.Integer, primary_key = True)
     feedback = db.Column(db.String)
