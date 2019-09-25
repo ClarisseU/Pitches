@@ -1,4 +1,4 @@
-from flask import render_template
+# from flask import render_template
 from app import app
 from flask import render_template,request,redirect,url_for
 from .forms import UpdateProfile,PitForm,CommentForm
@@ -17,7 +17,7 @@ def index():
 #adding a new pitch
 @main.route('/categories/view_pitch/add/<int:id>', methods=['GET','POST'])
 @login_required
-def new_pitch(id):
+def nu_pitch(id):
     '''
     function to insert or add new pitches and fetch from them some data
     '''
