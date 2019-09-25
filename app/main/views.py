@@ -1,9 +1,7 @@
-# from flask import render_template
 from . import main
 from flask import render_template,request,redirect,url_for, abort
 from .forms import UpdateProfile,PitForm,CommentForm
-from flask_login import login_required
-from ..models import Pitch,User
+from ..models import Pitch,User,Category
 from .. import db,photos
 from flask_login import login_required, current_user
 import markdown2 
@@ -56,6 +54,9 @@ def update_profile(uname):
 main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):
+    '''
+    function to update a picture
+    '''
     user = User.query.filter_by(username = uname).first()
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
@@ -139,8 +140,6 @@ def new_comment(id):
     pitches = Pitch.query.filter_by(id=id).first()
     user = User.query.filter_by(id = id).first()
     title=f'welcome to pitches comments'
-    # if user is None:
-    #     abort(404)
         
     if form.validate_on_submit():
         feedback = form.comment.data
@@ -150,10 +149,10 @@ def new_comment(id):
         return redirect(url_for('.index',uname=current_user.username))
     return render_template('comment.html', title = title, comment_form = form,pitches=pitches)
 
-@main.route('/review/<int:id>')
-def single_review(id):
-    review=Review.query.get(id)
-    if review is None:
-        abort(404)
-    format_review = markdown2.markdown(review.movie_review,extras=["code-friendly", "fenced-code-blocks"])
-    return render_template('review.html',review = review,format_review=format_review)
+# @main.route('/review/<int:id>')
+# def single_review(id):
+#     review=Review.query.get(id)
+#     if review is None:
+#         abort(404)
+#     format_review = markdown2.markdown(review.movie_review,extras=["code-friendly", "fenced-code-blocks"])
+#     return render_template('review.html',review = review,format_review=format_review)
