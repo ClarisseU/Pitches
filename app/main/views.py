@@ -2,6 +2,7 @@ from flask import render_template
 from app import app
 from flask import render_template,request,redirect,url_for
 from .forms import UpdateProfile,PitForm,CommentForm
+from flask_login import login_required
 
 # Views
 @main.route('/')
