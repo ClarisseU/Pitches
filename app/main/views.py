@@ -4,6 +4,7 @@ from flask import render_template,request,redirect,url_for, abort
 from .forms import UpdateProfile,PitForm,CommentForm
 from flask_login import login_required
 from ..models import Pitch,User
+from .. import db
 
 # Views
 @main.route('/')
@@ -26,6 +27,28 @@ def profile(uname):
         abort(404)
 
     return render_template("profile/profile.html", user = user)
+
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(uname):
+    '''
+    function to update my profile and save the changes
+    '''
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=user.username))
+
+    return render_template('profile/update.html',form =form)
 
 #adding a new pitch
 @main.route('/categories/view_pitch/add/<int:id>', methods=['GET','POST'])
@@ -90,3 +113,4 @@ def upvotes(id):
     db.session.commit()
     return redirect("/".format(id=pitch.id))
     return redirect(".profile".format(id=pitch.id))
+

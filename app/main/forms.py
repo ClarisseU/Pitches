@@ -4,6 +4,7 @@ from wtforms import TextAreaField,SubmitField
 from wtforms.validators import Required
 from .. import db
 
+#update profile form
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [Required()])
     submit = SubmitField('Submit')
@@ -16,4 +17,9 @@ class PitForm(FlaskForm):
 #Comment Form
 class CommentForm(FlaskForm):
     comment = TextAreaField('Comment', validators=[Required()])
-    submit = SubmitField('Leave a comment')   
+    submit = SubmitField('Leave a comment')  
+    
+
+# class UpdateProfile(FlaskForm):
+#     bio = TextAreaField('Tell us about you.',validators = [Required()])
+#     submit = SubmitField('Submit')     
