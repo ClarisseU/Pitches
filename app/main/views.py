@@ -1,8 +1,9 @@
 # from flask import render_template
 from app import app
-from flask import render_template,request,redirect,url_for
+from flask import render_template,request,redirect,url_for, abort
 from .forms import UpdateProfile,PitForm,CommentForm
 from flask_login import login_required
+from ..models import Pitch,User
 
 # Views
 @main.route('/')
@@ -13,6 +14,18 @@ def index():
     '''
     categorii=Category.query.all()
     return render_template('index.html', category=categorii)
+#views
+@main.route('/user/<uname>')
+def profile(uname):
+    '''
+    a function to hold profile
+    '''
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
 
 #adding a new pitch
 @main.route('/categories/view_pitch/add/<int:id>', methods=['GET','POST'])
