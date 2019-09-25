@@ -1,3 +1,5 @@
+from . import db
+
 class Pitch:
     '''
     Pitch class to define pitch objects
@@ -42,6 +44,44 @@ class Pitch:
     
     
 class Category(db.model):
+    __tablename__='category'
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(255))
+    pitch = db.relationship('Pitch',backref = 'categories', lazy ="dynamic")
+    
+    def save_cat(self):
+        db.session.add(self)
+        db.session.commit
+        
+        
+    @classmethod
+    def get_catz():
+        category = Category.query.all()
+        return category    
+    
+    def __repr__(self):
+        return f'Category {self.id}'
+    
+    
+class Comments(db.model):
+    __tablename__= 'comments' 
+    id = db.Column(db.Integer, primary_key = True)
+    feedback = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'))
+    
+    def save_comment(self):
+        '''
+        function to save comments
+        '''
+        db.session.add(self)
+        db.session.commit()
+        
+    @classmethod
+    def get_comments(self, id):
+        comment = Comments.query.filter_by(pitchez_id=id).all() 
+        return comment 
+       
         
             
             
