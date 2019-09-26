@@ -3,7 +3,7 @@
     <img src="{{ pitch.category }}" alt="{{ pitch.title }} category" class="img-responsive">
     <li class="text-center">
         <a href="/pitch/{{pitch.id}}">
-            {{ pitch.title|truncate(10)}}</a>
+            {{ pitch.title}}</a>
     </li>
 </div>
 
@@ -12,7 +12,7 @@
     <a href="{{url_for('main.category',id=category.id)}}">
         <p>{{category.name|upper}}</p>
     </a>
-    <!-- {% for c in category.pitch %} {{c.content}} {% endfor %} -->
+    {% for c in category.pitch %}<br> {{c.content}} {% endfor %}
 
 </div>
 

@@ -1,11 +1,12 @@
 {% extends "base.html" %} {% block content %}
 <div class=" col-md-10 col-md-offset-1 col-sm-12">
-    {% for cate in pitches %}
+    <!-- {% for cate in pitches %}
     <h3 class="text-center">{{cate.name|upper}}</h3>
-    <a class="btn btn-primary text-center text-danger" style="float:right;" href="{{url_for('main.new_pitch',id=category.id)}}"> Post a Pitch</a>
-    <hr> {% endfor %}
+    {% endfor %}
+    <a class="btn btn-primary text-center text-danger" style="float:right;" href="{{url_for('main.new_pitch',id=category.id)}}">{{cate.name|upper}} Pitch</a>
+    <hr> -->
 </div>
-{% for pitch in pitches %}
+{{ macro.displayPitchList(pitch_list)}} {% for pitch in pitch_list %}
 <div class="col-md-12">
     <div class="well">
         <div class="row">

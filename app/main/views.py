@@ -110,9 +110,9 @@ def nu_pitch(id):
     if form.validate_on_submit():
         content = form.content.data
         nu_pitch= Pitch(content=content,category=category.id,user_id=current_user.id,upvotes=0,downvotes=0)
-        nu_pitch.save_pitch()
+        nu_pitch.save_pitches()
         return redirect(url_for('.index',id=category.id))
-    return render_template('new_pitch.html', title = title, pitch_form = form, category = category)
+    return render_template('nu_pitch.html', title = title, pitch_form = form, category = category)
 
 #view Pitch with its comments
 @main.route('/categories/view_pitch/<int:id>', methods=['GET', 'POST'])

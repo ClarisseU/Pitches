@@ -1,28 +1,21 @@
 {% extends "base.html" %} {% import 'macros.html' as macro%} {% block content %}
 
 <div class="container">
-    {{ macro.displayCategoryList(category) }} {% for cat in category%}
-    <a class="btn btn-primary text-center text-danger" style="float:right;" href="{{url_for('main.nu_pitch',id=cat.id)}}"> Post a Pitch</a> {% endfor %}
+    {{ macro.displayCategoryList(category) }}{% for cat in category%}
+    <a class="btn btn-primary text-center text-danger" style="float:right; margin-top: 2%" href="{{url_for('main.nu_pitch',id=cat.id)}}"> {{cat.name|upper}} add a Pitch</a>
 
 </div>
-
-
-
 <br>
 <br>
 
 <div class=" col-md-10 col-md-offset-1 col-sm-12">
-
-
-    <h3 class="text-center">{{category.name|upper}}</h3>
-
-    <hr>
+    <hr> {% endfor %}
 
 </div>
 
 {% if pitches %}
 <div class="col-sm-12 col-md-8">
-    {{ macro.displayPitchList(pitches)}}
+    {{ macro.displayPitchList(pitch)}}
 </div>
 {%else%}
 <div class="well">
