@@ -2,6 +2,7 @@
 
 <div class="container">
     {{ macro.displayCategoryList(category) }}{% for cat in category%}
+
     <a class="btn btn-primary text-center text-danger" style="float:right; margin-top: 2%" href="{{url_for('main.nu_pitch',id=cat.id)}}"> {{cat.name|upper}} add a Pitch</a>
 
 </div>
@@ -16,6 +17,7 @@
 {% if pitches %}
 <div class="col-sm-12 col-md-8">
     {{ macro.displayPitchList(pitch)}}
+
 </div>
 {%else%}
 <div class="well">
