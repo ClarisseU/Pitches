@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% import 'macros.html' as macro%} {% block content %}
 
 <div class="container">
-    {{ macro.displayCategoryList(category) }}{% for cat in category%}
+    <p>{{ macro.displayCategoryList(category) }}</p>{% for cat in category%}
 
     <a class="btn btn-primary text-center text-danger" style="float:right; margin-top: 2%" href="{{url_for('main.nu_pitch',id=cat.id)}}"> {{cat.name|upper}} add a Pitch</a>
 
