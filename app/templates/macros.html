@@ -12,6 +12,8 @@
     <a href="{{url_for('main.category',id=category.id)}}">
         <p>{{category.name|upper}}</p>
     </a>
+    {% for c in category.pitch %} {{c.content}} {% endfor %}
+
 </div>
 
 {% endfor %} {% endmacro %}

@@ -37,10 +37,10 @@ def new_category():
 @main.route('/categories/<int:id>')
 def category(id):
     categorii = Category.get_catz()
-    pitches = Pitch.query.filter_by(category=categorii.id).all()
+    pitches = Pitch.query.filter_by(category=id).all()
     print(category)
 
-    return render_template('category.html', pitches=pitches, category=category_)
+    return render_template('category.html', pitches=pitches, category=categorii)
 
 
 
