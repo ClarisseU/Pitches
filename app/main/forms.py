@@ -19,7 +19,12 @@ class CommentForm(FlaskForm):
     comment = TextAreaField('Comment', validators=[Required()])
     submit = SubmitField('Leave a comment')  
     
+#updateProfileForm
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Tell us about you.',validators = [Required()])
+    submit = SubmitField('Submit')   
 
-# class UpdateProfile(FlaskForm):
-#     bio = TextAreaField('Tell us about you.',validators = [Required()])
-#     submit = SubmitField('Submit')     
+#categoryForm
+class CategoryForm(FlaskForm):
+    name = TextAreaField('Category')
+    submit = SubmitField()  

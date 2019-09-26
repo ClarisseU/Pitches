@@ -1,60 +1,46 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% import 'macros.html' as macro%}{% block styles%} {{ super() }}
+<!--super() function tells Jinja not to override any code that is defined in the block-->
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}"> {% endblock %}
+<br> {% block content %}
 
-<link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Vollkorn+SC&display=swap" rel="stylesheet">
-<br>
-<br>
-<div class="container">
+<div class="container-fluid" style="font-family: 'Russo One', sans-serif;">
+    <div class="row">
 
-
-    <div style="font-family: 'Archivo Narrow', sans-serif;color:black" class=" col-md-10 col-md-offset-1 col-sm-12">
-
-
-        <h1><strong>Welcome to the Pitch Website</strong></h1><br>
-        <p>In life, you only have 60 seconds to impress someone. 1 minute can make or break you. How do we make sure that you use your 1 minute to actually say something meaningful?</p>
-        <p>Click on the following links an have fun posting and impress the world: </p>
-        {% for cat in category%}
-
-        <!-- <h3 class="text">{{cat.name|upper}}</h3> -->
-        <div>
-
-            <h3 class="text">
-                <a style="color:black" href="{{url_for('main.nu_pitch',id=cat.id)}}">
-                    <p>{{cat.name|upper}}</p>
-                </a>
-            </h3>
-        </div>
-
-        <hr> {% for pitc in cate.pitch %}
-        <div class="col-md-12">
-            <div class="well">
-                <div class="row">
-                    <div class="col-md-10 col-sm-12">
-                        <p><strong>pitch content:</strong>{{pitc.content}}</p>
-                        <p><strong>posted at:</strong>{{pitc.posted}}</p>
-                        <p><strong>posted by:</strong>{{pitc.users.username}}</p>
-                        {% for com in pitc.comments %}
-                        <p><strong>{{com.username}} feedback:</strong>{{com.feedback}}</p>
-                        {% endfor %}
-                        <a href="/upvote/{{pit.id}}" type="button" style="background-color: black" class="btn btn-info">upvote {{pit.upvotes}}</a>
-                        <a href="/downvote/{{pit.id}}" type="button" style="background-color: black" class="btn btn-info">downvote {{pit.downvotes}}</a>
-                        <a href="{{url_for('main.new_comment',id=pit.id)}}"><button style="background-color: black" type="button" class="btn btn-info">Comment</button></a>
-
-
-
-                    </div>
-                </div>
+        <div class="container" id="block-text">
+            <br>
+            <div class="col-md-6">
+                <img src="/static/photos/minute.jpg" style="margin-right: 100%;padding-right: 100%; height:300px;">
             </div>
 
 
-
+            <br>
+            <div class="col-md-6">
+                <p style="font-size: 20px; float:left;"> <strong> In life you only have 60 seconds to impress someone. One minute to make or break you. How do we make sure that you use your one minute to actually say something meaningful ? </strong> </p>
+            </div>
         </div>
-        {% endfor %}
-        <div class="well">
-            <h4 style="padding:10%; text-align:center;display:none; font-size:50px">NO PITCHES IN THIS CATEGORY. </h4>
-        </div>
-        {% endfor %}
-
     </div>
+
+    <hr>
+
+    <div class="container">
+        <br>
+        <h2> <strong>PITCH CATEGORIES </strong></h2>
+        <strong style="font-size: 20px;">{{ macro.displayCategoryList(category) }} </strong>
+        <br>
+        <br>
+
+
+        <h3 class="add-category"><a class="btn btn-primary" href="/add/category" style="background-color:#002457; float:right;"><span aria-hidden="true"> ADD CATEGORY </span></a></h3>
+    </div>
+
+</div>
+
+<div class="well">
+    <h4 style="padding:10%; text-align:center;display:none; font-size:50px">NO PITCHES IN THIS CATEGORY. </h4>
+</div>
+
+
+</div>
 
 </div>
 {% endblock%}

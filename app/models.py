@@ -9,6 +9,7 @@ from datetime import datetime
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+#user class
 class User(UserMixin,db.Model):
     __tablename__= 'users'
     
@@ -91,11 +92,11 @@ class Category(db.Model):
     
     def save_cat(self):
         db.session.add(self)
-        db.session.commit
+        db.session.commit   
         
         
     @classmethod
-    def get_catz():
+    def get_catz(cls):
         category = Category.query.all()
         return category    
     

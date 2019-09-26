@@ -1,6 +1,6 @@
 from . import main
 from flask import render_template,request,redirect,url_for, abort
-from .forms import UpdateProfile,PitForm,CommentForm
+from .forms import UpdateProfile,PitForm,CommentForm,CategoryForm
 from ..models import Pitch,User,Category
 from .. import db,photos
 from flask_login import login_required, current_user
@@ -13,10 +13,37 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    categorii=Category.query.all()
-    return render_template('index.html', category=categorii)
+    category=Category.get_catz()
+    return render_template('index.html', category=category)
 
-#views
+@main.route('/add/category', methods=['GET','POST'])
+@login_required
+def new_category():
+    '''
+    View new group route function that returns a page with a form to create a category
+    '''
+    form = CategoryForm()
+
+    if form.validate_on_submit():
+        name = form.name.data
+        new_category = Category(name=name)
+        new_category.save_cat()
+
+        return redirect(url_for('.index'))    
+    title = 'New category'
+    return render_template('nu_category.html', category_form = form,title=title)
+
+
+@main.route('/categories/<int:id>')
+def category(id):
+    # category_ = Category.get_catz()
+    pitches = Pitch.query.filter_by(category=category_.id).all()
+    print(category)
+
+    return render_template('category.html', pitches=pitches, category=category_)
+
+
+
 @main.route('/user/<uname>')
 def profile(uname):
     '''
@@ -28,6 +55,7 @@ def profile(uname):
         abort(404)
 
     return render_template("profile/profile.html", user = user)
+
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
