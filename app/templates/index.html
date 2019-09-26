@@ -24,10 +24,11 @@
         <br>
         <h2> <strong>PITCH CATEGORIES </strong></h2>
         <strong style="font-size: 20px;">{{ macro.displayCategoryList(category) }} </strong>
+        <a class="btn btn-primary btn-success text-center text-success" href="url_for('main.downvotes')">downvote</a>
+        <a class="btn btn-primary btn-success text-center text-success" href="url_for('main.upvotes')">upvote</a>
+        <br><br>
+        <a class="btn btn-primary btn-success text-center text-success" href="url_for('main.upvotes')">comment</a>
         <br>
-        <br>
-
-
         <h3 class="add-category"><a class="btn btn-primary" href="/add/category" style="background-color:#002457; float:right;"><span aria-hidden="true"> ADD CATEGORY </span></a></h3>
     </div>
 
