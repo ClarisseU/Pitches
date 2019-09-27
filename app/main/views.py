@@ -1,7 +1,7 @@
 from . import main
 from flask import render_template,request,redirect,url_for, abort
 from .forms import UpdateProfile,PitForm,CommentForm,CategoryForm
-from ..models import Pitch,User,Category,Comments
+from ..models import Pitch,User,Category
 from .. import db,photos
 from flask_login import login_required, current_user
 import markdown2 
@@ -157,24 +157,30 @@ def upvotes(id):
     return redirect("/".format(id=pitch.id))
     return redirect(".profile".format(id=pitch.id))
 
-@main.route('/new_comment/<int:pitch_id>', methods=['GET','POST'])
+@main.route('/new_comment/<int:id>', methods=['GET','POST'])
 @login_required
-def new_comment(pitch_id):
+def new_comment(id):
     '''
     function that adds comment
     '''
     form = CommentForm()
-    comment = Comment.query.filter_by(pitch_id=pitch_id).all()
-    pitches = Pitch.query.get(pitch_id=pitch_id)
+    comment = Comment.query.filter_by(pitch_id=id).all()
+    pitches = Pitch.query.filter_by(id=id).first()
     user = User.query.filter_by(id = id).first()
     title=f'welcome to pitches comments'
         
     if form.validate_on_submit():
-        new_comment = form.new_comment.data
-        new_comment= Comment(new_comment=new_comment,user_id=current_user.id,pitch_id=pitches.id)
+        feedback = form.comment.data
+        new_comment= Comment(feedback=feedback,user_id=current_user.id,pitch_id=pitches.id)
          
         new_comment.save_comment()
-        return redirect(url_for('.new_comment',pitch_id=pitch_id))
-    return render_template('comment.html', title = title, comment_form = form,pitches=pitches,comment = comment)
+        return redirect(url_for('.index',uname=current_user.username))
+    return render_template('comment.html', title = title, comment_form = form,pitches=pitches)
 
 # @main.route('/review/<int:id>')
+# def single_review(id):
+#     review=Review.query.get(id)
+#     if review is None:
+#         abort(404)
+#     format_review = markdown2.markdown(review.movie_review,extras=["code-friendly", "fenced-code-blocks"])
+#     return render_template('review.html',review = review,format_review=format_review)
