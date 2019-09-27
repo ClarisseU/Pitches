@@ -3,13 +3,12 @@
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}"> {% endblock %}
 <br> {% block content %}
 
-<div class="container-fluid" style="font-family: 'Russo One', sans-serif;">
+<div class="container-fluid" style="font-family: 'Lato', sans-serif;">
     <div class="row">
 
         <div class="container" id="block-text">
             <br>
             <div class="col-md-6">
-                <!-- <img src="/static/photos/minute.jpg" style="margin-right: 100%;padding-right: 100%; height:300px;"> -->
             </div>
 
 
@@ -21,17 +20,18 @@
     </div>
 
     <div class="container">
+
         <br>
         <h2> <strong>PITCH CATEGORIES </strong></h2>
         <strong style="font-size: 20px">{{ macro.displayCategoryList(category) }} </strong>
-        <a class="btn btn-primary btn-success text-center text-success" href="url_for('main.downvotes')">downvote</a>
-        <a class="btn btn-primary btn-success text-center text-success" href="url_for('main.upvotes')">upvote</a>
+        <!-- <a class="btn btn-primary btn-success text-center text-success" href="url_for('main.downvotes')">downvote</a>
+        <a class="btn btn-primary btn-success text-center text-success" href="url_for('main.upvotes')">upvote</a> -->
         <br><br>
-        <a class="btn btn-primary btn-success text-center text-success" href="url_for('main.login_required.new_comment')">comment</a>
+
+        <a class="btn btn-primary btn-success text-center text-success" href="{{url_for('main.new_comment')}}">comment</a>
         <br>
         <h3 class="add-category"><a class="btn btn-primary" href="/add/category" style="background-color:#002457; float:right;"><span aria-hidden="true"> ADD CATEGORY </span></a></h3>
     </div>
-
 </div>
 
 <div class="well">
